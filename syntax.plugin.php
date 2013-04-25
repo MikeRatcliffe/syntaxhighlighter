@@ -107,7 +107,7 @@ class Syntax extends Plugin {
 			return $match[0];
 
 		// Get language
-		$lang = isset( $attributes['syntax']['lang'] ) ? $attributes['syntax']['lang'] : false;
+		$lang = isset( $attributes['lang'] ) ? (string)$attributes['lang'] : false;
 		if ( ! $lang ) $lang = Options::get( 'syntax__default_lang' );
 		$lang = preg_replace('#[^a-zA-Z0-9\-_]#', '', $lang);
 
