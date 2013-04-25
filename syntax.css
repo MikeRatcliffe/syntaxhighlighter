@@ -1,18 +1,39 @@
 .syntax_highlight {
-/*  color: #100;
-  background-color: #f9f9f9;
-  border: 1px solid silver;
-  margin: 0 0 1.5em 0;
-  /*overflow: auto;*/
+  font-size: 14px;
+  background-color: #eee;
+  padding: 5px 0;
+  margin: 10px 0;
 }
 
-/* IE FIX */
-/*.syntax_highlight {
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding-bottom: expression(this.scrollWidth > this.offsetWidth ? 15 : 0);
-  width: 100%;
-}*/
+#posts .syntax_highlight > pre > ol {
+  counter-reset: item;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#posts .syntax_highlight > pre > ol > li {
+  background: none;
+  padding-left: 0;
+  line-height: 17px;
+  margin: 0;
+}
+
+#posts .syntax_highlight > pre > ol > li:before {
+  content: " " counter(item);
+  counter-increment: item;
+  float: left;
+}
+
+#posts .syntax_highlight > pre > ol > li > div {
+  border-left: 2px solid #6CE26C;
+  margin-left: 20px;
+  padding-left: 7px;
+}
+
+#posts .syntax_highlight > pre > ol > li.ln-xtra {
+  background-color: #e5e5e5;
+}
 
 .syntax_highlight table {
 	width: 100%;
@@ -20,6 +41,7 @@
 	border: none;
 	padding: 0;
 }
+
 .syntax_highlight td {
 	padding: 0;
 	border: 0;
@@ -28,28 +50,32 @@
 .syntax_highlight .line_numbers {
 	text-align: right;
 	width: 10px;
+  border-right: 2px solid #afafaf;
 }
 
 /* potential overrides for other styles */
-.syntax_highlight pre {
-	/*font-size: 12px;
-	line-height: 1.333;*/
+.syntax_highlight > pre {
+  margin: 0;
 }
 
+.syntax_highlight > pre > ol {
+    list-style: decimal outside none;
+    padding-left: 17px;
+}
 
 /**
  * Keywords
  */
-.kw1 { color: #b1b100; }
-.kw2 { color: #000000; font-weight: bold; }
-.kw3 { color: #990000; }
+.kw1 { color: #00e; font-weight: bold;}
+.kw2 { color: #000000; font-weight: bold;}
+.kw3 { color: #990000; font-weight: bold;}
 
 .de1 {}
 
 /**
  * Comments
  */
- .coMULTI, 
+ .coMULTI,
 .co1, .co2, .co3, .co4 { color: #666666; font-style: italic; }
 .co3 { color: #0000cc; }
 
@@ -66,7 +92,7 @@
  * Strings
  */
 .st0 { color: #0000ff; }
-.st_h { color: #0000ff; } 
+.st_h { color: #0000ff; }
 
 /**
  * Brackets
