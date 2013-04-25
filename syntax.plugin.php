@@ -28,8 +28,7 @@ class Syntax extends Plugin {
 	public function action_plugin_activation( $file )
 	{
 		if(Plugins::id_from_file($file) == Plugins::id_from_file(__FILE__)) {
-			Options::set( 'syntax__default_lang', 'php' );
-			Options::set( 'syntax__line_numbers', '' );
+			Options::set( 'syntax__default_lang', 'javascript' );
 		}
 	}
 
