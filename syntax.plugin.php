@@ -55,7 +55,6 @@ class Syntax extends Plugin {
 				case _t('Configure'):
 					$ui= new FormUI( strtolower( get_class( $this ) ) );
 					$ui->append( 'text', 'default_lang', 'syntax__default_lang', _t('Default language:') );
-					$ui->append( 'checkbox', 'line_numbers', 'syntax__line_numbers', _t('Show Line Numbers:') );
 					$ui->append( 'submit', 'save', _t('Save') );
 					$ui->out();
 				break;
@@ -115,7 +114,6 @@ class Syntax extends Plugin {
 		// should we do line highlighting
 		$line = isset( $attributes['syntax']['lines'] ) ? $attributes['syntax']['lines'] :
 			isset( $attributes['syntax']['line'] ) ? $attributes['syntax']['line'] : false;
-		if ( ! $line ) $line = ( Options::get( 'syntax__line_numbers' ) ? 'on' : 'off' );
 
 		// Turn off error reporting
 		$er = error_reporting();
