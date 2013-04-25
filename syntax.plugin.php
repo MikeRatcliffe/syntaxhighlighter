@@ -108,12 +108,10 @@ class Syntax extends Plugin {
 
 		// Get language
 		$lang = isset( $attributes['lang'] ) ? (string)$attributes['lang'] : false;
+		$lineNumbersEnabled = isset( $attributes['linenumbers'] ) ? $attributes['linenumbers'] == "true" : false;
+
 		if ( ! $lang ) $lang = Options::get( 'syntax__default_lang' );
 		$lang = preg_replace('#[^a-zA-Z0-9\-_]#', '', $lang);
-
-		// should we do line highlighting
-		$line = isset( $attributes['syntax']['lines'] ) ? $attributes['syntax']['lines'] :
-			isset( $attributes['syntax']['line'] ) ? $attributes['syntax']['line'] : false;
 
 		// Turn off error reporting
 		$er = error_reporting();
@@ -131,8 +129,14 @@ class Syntax extends Plugin {
 		// saves output time
 		$geshi->enable_classes( true );
 		$geshi->enable_keyword_links( false );
-		$geshi->enable_line_numbers( GESHI_NORMAL_LINE_NUMBERS, 5 );
-		//$geshi->enable_line_numbers( GESHI_FANCY_LINE_NUMBERS, 5 );
+		if ($lineNumbersEnabled) {
+			$geshi->enable_line_numbers( GESHI_NORMAL_LINE_NUMBERS);
+
+			$highlightLines = isset( $attributes['highlightlines'] ) ? $attributes['highlightlines'] : false;
+			if ($highlightLines) {
+				$geshi->highlight_lines_extra(explode(",", $highlightLines));
+			}
+		}
 
 		// remove PRE default style
 		$geshi->set_overall_style('', false);
@@ -141,15 +145,7 @@ class Syntax extends Plugin {
 		error_reporting($er);
 
 		// create output
-		$output = "";
-		$count = count( explode("\n", $code) );
-		if ( $line == 'on' && $count > 1 ) {
-			$output .= "<table><tr><td class=\"line_numbers\"><pre>";
-			$this->line_numbers( $code, $output, $count, Options::get('syntax__start_on_one') );
-			$output .= "</pre></td><td class=\"code\">$parsed</td></tr></table>";
-		} else {
-			$output .= $parsed;
-		}
+  	$output = $parsed;
 
 		return "<div class=\"syntax_highlight\">$output</div>";
 	}
