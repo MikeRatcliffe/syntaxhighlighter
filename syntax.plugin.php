@@ -117,10 +117,8 @@ class Syntax extends Plugin {
 		$er = error_reporting();
 		error_reporting(0);
 
-		// We need to include this here...
-		// YOU CAN REMOVE THIS IF YOU HAVE GeSHi in your user/classes
 		if ( !class_exists('GeSHi') )
-			require_once ( dirname(__FILE__) . '/geshi.php' );
+			require_once ( dirname(__FILE__) . '/geshi/geshi.php' );
 
 		// Start GeSHi
 		$geshi = new GeSHi($code, $lang);
